@@ -1,3 +1,5 @@
+-- Inserts
+
 INSERT INTO Centro_pesquisa (nome, endereco, ramal, email, telefone, area_atuacao) VALUES
 ('Centro de Estudos Avançados', 'Rua A, 123, Brasil, SP', 101, 'cea@centro.com', '1234-5678', 'Física'),
 ('Centro de Pesquisa Tecnológica', 'Rua B, 456, Brasil, RJ', 102, 'cpt@centro.com', '9876-5432', 'Tecnologia'),
@@ -141,3 +143,25 @@ INSERT INTO Financia (fk_Financiador_ID_financiador, fk_Financeiro_ID_financeiro
 (8, 8),
 (9, 9),
 (10, 10);
+
+-- Updates
+
+UPDATE Centro_pesquisa SET telefone = '9999-8888' WHERE ID_centro = 1;
+UPDATE Departamento SET chefe_Departamento = 'Dr. Antonio Silva' WHERE ID_departamento = 2;
+UPDATE Trabalhador SET email = 'carlos.pereira_novo@centro.com' WHERE CPF = 33333333333;
+UPDATE Equipamento SET descricao = 'Novo equipamento para análise avançada' WHERE ID_equipamento = 3;
+UPDATE Compra SET valor = 52000.00 WHERE fk_Equipamento_ID_equipamento = 1 AND fk_Funcionario_CPF = 11111111111;
+UPDATE Projeto_pesquisa SET data_finalizacao = '2023-12-31' WHERE ID_pesquisa = 1;
+UPDATE Quem_pesquisa SET FK_CPF_orientador = 22222222222 WHERE FK_projeto = 1;
+UPDATE Publicacao SET titulo = 'Nova Publicação Física Quântica' WHERE ID_publicacao = 1;
+UPDATE Participa SET fk_Publicação_ID_publicação = 2 WHERE fk_Trabalhador_CPF = 11111111111;
+UPDATE Financiador SET contato = 'novo_contato@fundacao.com' WHERE ID_financiador = 1;
+UPDATE Financeiro SET valor = 105000.00 WHERE ID_financeiro = 1;
+UPDATE Financia SET fk_Financiador_ID_financiador = 2 WHERE fk_Financeiro_ID_financeiro = 1;
+
+-- Deletes
+
+DELETE FROM Compra WHERE fk_Equipamento_ID_equipamento = 10 AND fk_Funcionario_CPF = 10101010101;
+DELETE FROM Quem_pesquisa WHERE FK_projeto = 10;
+DELETE FROM Participa WHERE fk_Publicação_ID_publicação = 10;
+DELETE FROM Financia WHERE fk_Financeiro_ID_financeiro = 10;
