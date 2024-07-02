@@ -1,109 +1,3 @@
-CREATE DATABASE CENTROS
-default character set utf8
-default collate utf8_general_ci;
-
-use CENTROS;
-
-create table Centro_pesquisa(
-ID_centro int not null auto_increment Primary key,
-nome varchar(40) not null,
-endereco varchar(100) default ('Rua, numero, Pais, Estado'),
-ramal int,
-email varchar(40) not null,
-telefone varchar(20),
-area_atuacao varchar(40));
-
-create table Departamento(
-ID_departamento int not null auto_increment Primary key,
-nome varchar(60) not null,
-chefe_Departamento varchar(40) not null,
-FK_CentPesq_PK int,
-foreign key (FK_CentPesq_PK) references Centro_pesquisa(ID_centro));
-
-create table Trabalhador(
-CPF bigint not null primary key,
-nome varchar(40) not null,
-data_admissao date not null,
-data_nascimento date not null,
-email varchar(40) not null,
-endereco varchar(40) not null,
-telefone varchar(20),
-area_especialização varchar(40) not null,
-tipo_trabalhador enum('Funcionario', 'Pesquisador'),
-FK_ID_departamento_PK int not null,
-foreign key (FK_ID_departamento_PK) references Departamento(ID_departamento));
-
-create table Equipamento(
-ID_equipamento int not null auto_increment Primary key,
-nome varchar(40) not null,
-descricao varchar(60) not null,
-FK_ID_departamento_PK int not null,
-foreign key (FK_ID_departamento_PK) references Departamento(ID_departamento));
-
-create table Compra( #funcionario compra equipamento
-Data_compra date not null,
-valor decimal,
-fk_Equipamento_ID_equipamento int,
-fk_Funcionario_CPF bigint,
-foreign key (fk_Equipamento_ID_equipamento) references Equipamento(ID_equipamento),
-foreign key (fk_Funcionario_CPF) references Trabalhador(CPF));
-
-create table Projeto_pesquisa(
-ID_pesquisa int not null auto_increment Primary key,
-titulo varchar(40) not null,
-descricao varchar (60) not null,
-data_inicio date not null,
-data_finalizacao date,
-FK_ID_departamento_PK int,
-foreign key (FK_ID_departamento_PK) references Departamento(ID_departamento));
-
-create table Quem_pesquisa(
-FK_projeto int,
-FK_CPF_orientador bigint,
-FK_CPF_pesquisador bigint,
-foreign key (FK_projeto) references Projeto_pesquisa(ID_pesquisa),
-foreign key (FK_CPF_orientador) references Trabalhador(CPF),
-foreign key (FK_CPF_pesquisador) references Trabalhador(CPF));
-
-create table Publicacao(
-ID_publicacao int not null auto_increment Primary key,
-titulo varchar(40) not null,
-descricao varchar(60),
-area varchar(20),
-FK_ID_pesquisa_PK int,
-FK_ID_departamento int,
-foreign key (FK_ID_pesquisa_PK) references Projeto_pesquisa(ID_pesquisa));
-
-create table Participa ( #pesquisador participa de publicação
-fk_Trabalhador_CPF bigint,
-fk_Publicação_ID_publicação int,
-foreign key (fk_Trabalhador_CPF) references Trabalhador(CPF),
-foreign key (fk_Publicação_ID_publicação ) references Publicacao(ID_publicacao));
-
-create table Financiador(
-ID_financiador int not null auto_increment Primary key,
-nome varchar(100),
-contato varchar(40));
-
-create table Financeiro(
-ID_financeiro int not null auto_increment Primary key,
-valor decimal not null,
-tipo_financeiro enum('Entrada', 'Saida'),
-descricao_gasto varchar(80),
-descricao_movimentacao varchar(80),
-data_movimentacao date not null,
-FK_ID_pesquisa int,
-FK_ID_financiador int,
-foreign key (FK_ID_pesquisa) references Projeto_pesquisa(ID_pesquisa),
-foreign key (FK_ID_financiador) references Financiador(ID_financiador));
-
-CREATE TABLE Financia ( #financiador contribui (financia) para algum financeiro
-fk_Financiador_ID_financiador int,
-fk_Financeiro_ID_financeiro int,
-foreign key (fk_Financiador_ID_financiador) references Financiador(ID_financiador),
-foreign key (fk_Financeiro_ID_financeiro) references Financeiro(ID_financeiro));
-
--- Inserindo dados na tabela Centro_pesquisa
 INSERT INTO Centro_pesquisa (nome, endereco, ramal, email, telefone, area_atuacao) VALUES
 ('Centro de Estudos Avançados', 'Rua A, 123, Brasil, SP', 101, 'cea@centro.com', '1234-5678', 'Física'),
 ('Centro de Pesquisa Tecnológica', 'Rua B, 456, Brasil, RJ', 102, 'cpt@centro.com', '9876-5432', 'Tecnologia'),
@@ -116,7 +10,6 @@ INSERT INTO Centro_pesquisa (nome, endereco, ramal, email, telefone, area_atuaca
 ('Centro de Estudos Agrícolas', 'Rua I, 606, Brasil, SC', 109, 'cea@centro.com', '7788-9900', 'Agronomia'),
 ('Centro de Pesquisa Ambiental', 'Rua J, 707, Brasil, MT', 110, 'cpa@centro.com', '4455-6677', 'Meio Ambiente');
 
--- Inserindo dados na tabela Departamento
 INSERT INTO Departamento (nome, chefe_Departamento, FK_CentPesq_PK) VALUES
 ('Departamento de Física Teórica', 'Dr. João Silva', 1),
 ('Departamento de Engenharia Civil', 'Eng. Maria Souza', 4),
@@ -129,7 +22,6 @@ INSERT INTO Departamento (nome, chefe_Departamento, FK_CentPesq_PK) VALUES
 ('Departamento de Agricultura Sustentável', 'Eng. Ricardo Mota', 9),
 ('Departamento de Gestão Ambiental', 'Dra. Fernanda Ribeiro', 10);
 
--- Inserindo dados na tabela Trabalhador
 INSERT INTO Trabalhador (CPF, nome, data_admissao, data_nascimento, email, endereco, telefone, area_especialização, tipo_trabalhador, FK_ID_departamento_PK) VALUES
 (11111111111, 'João Almeida', '2022-01-15', '1980-05-20', 'joao.almeida@centro.com', 'Rua A, 123', '1234-5678', 'Física Teórica', 'Pesquisador', 1),
 (22222222222, 'Maria Oliveira', '2021-03-10', '1975-08-15', 'maria.oliveira@centro.com', 'Rua B, 456', '9876-5432', 'Engenharia Civil', 'Pesquisador', 2),
@@ -142,7 +34,6 @@ INSERT INTO Trabalhador (CPF, nome, data_admissao, data_nascimento, email, ender
 (99999999999, 'Ricardo Mota', '2022-04-22', '1981-01-25', 'ricardo.mota@centro.com', 'Rua I, 606', '7788-9900', 'Agricultura Sustentável', 'Pesquisador', 9),
 (10101010101, 'Fernanda Ribeiro', '2020-08-30', '1984-04-18', 'fernanda.ribeiro@centro.com', 'Rua J, 707', '4455-6677', 'Gestão Ambiental', 'Pesquisador', 10);
 
--- Inserindo dados na tabela Equipamento
 INSERT INTO Equipamento (nome, descricao, FK_ID_departamento_PK) VALUES
 ('Microscópio Eletrônico', 'Microscópio para análises avançadas', 1),
 ('Computador de Alto Desempenho', 'Computador para cálculos complexos', 2),
@@ -155,7 +46,6 @@ INSERT INTO Equipamento (nome, descricao, FK_ID_departamento_PK) VALUES
 ('Trator de Precisão', 'Equipamento agrícola de alta precisão', 9),
 ('Sistema de Monitoramento Ambiental', 'Sistema completo para monitoramento de áreas ambientais', 10);
 
--- Inserindo dados na tabela Compra
 INSERT INTO Compra (Data_compra, valor, fk_Equipamento_ID_equipamento, fk_Funcionario_CPF) VALUES
 ('2023-01-10', 50000.00, 1, 11111111111),
 ('2023-02-15', 25000.00, 2, 22222222222),
@@ -168,7 +58,6 @@ INSERT INTO Compra (Data_compra, valor, fk_Equipamento_ID_equipamento, fk_Funcio
 ('2023-09-20', 50000.00, 9, 99999999999),
 ('2023-10-25', 60000.00, 10, 10101010101);
 
--- Inserindo dados na tabela Projeto_pesquisa
 INSERT INTO Projeto_pesquisa (titulo, descricao, data_inicio, data_finalizacao, FK_ID_departamento_PK) VALUES
 ('Projeto Física Quântica', 'Pesquisa avançada em física quântica', '2022-01-01', '2024-01-01', 1),
 ('Projeto Pontes Sustentáveis', 'Desenvolvimento de pontes com materiais sustentáveis', '2022-02-01', '2024-02-01', 2),
@@ -181,7 +70,6 @@ INSERT INTO Projeto_pesquisa (titulo, descricao, data_inicio, data_finalizacao, 
 ('Projeto Agricultura Sustentável', 'Desenvolvimento de técnicas de agricultura sustentável', '2022-09-01', '2024-09-01', 9),
 ('Projeto Conservação Ambiental', 'Estudo de métodos de conservação ambiental', '2022-10-01', '2024-10-01', 10);
 
--- Inserindo dados na tabela Pesquisa
 INSERT INTO Quem_pesquisa (FK_projeto, FK_CPF_orientador, FK_CPF_pesquisador) VALUES
 (1, 11111111111, 11111111111),
 (2, 22222222222, 22222222222),
@@ -194,7 +82,6 @@ INSERT INTO Quem_pesquisa (FK_projeto, FK_CPF_orientador, FK_CPF_pesquisador) VA
 (9, 99999999999, 99999999999),
 (10, 10101010101, 10101010101);
 
--- Inserindo dados na tabela Publicacao
 INSERT INTO Publicacao (titulo, descricao, area, FK_ID_pesquisa_PK, FK_ID_departamento) VALUES
 ('Publicação Física Quântica', 'Resultados da pesquisa em física quântica', 'Física', 1, 1),
 ('Publicação Engenharia Sustentável', 'Estudos sobre pontes sustentáveis', 'Engenharia', 2, 2),
@@ -207,7 +94,6 @@ INSERT INTO Publicacao (titulo, descricao, area, FK_ID_pesquisa_PK, FK_ID_depart
 ('Publicação Agricultura', 'Técnicas de agricultura sustentável', 'Agronomia', 9, 9),
 ('Publicação Conservação Ambiental', 'Métodos de conservação ambiental', 'Meio Ambiente', 10, 10);
 
--- Inserindo dados na tabela Participa
 INSERT INTO Participa (fk_Trabalhador_CPF, fk_Publicação_ID_publicação) VALUES
 (11111111111, 1),
 (22222222222, 2),
@@ -220,7 +106,6 @@ INSERT INTO Participa (fk_Trabalhador_CPF, fk_Publicação_ID_publicação) VALU
 (99999999999, 9),
 (10101010101, 10);
 
--- Inserindo dados na tabela Financiador
 INSERT INTO Financiador (nome, contato) VALUES
 ('Fundação de Amparo à Pesquisa', 'fap@fundacao.com'),
 ('Conselho Nacional de Desenvolvimento Científico e Tecnológico', 'cnpq@conselho.com'),
@@ -233,7 +118,6 @@ INSERT INTO Financiador (nome, contato) VALUES
 ('Fundação W', 'fundacaow@fundacao.com'),
 ('Associação V', 'associacaov@associacao.com');
 
--- Inserindo dados na tabela Financeiro
 INSERT INTO Financeiro (valor, tipo_financeiro, descricao_gasto, descricao_movimentacao, data_movimentacao, FK_ID_financiador) VALUES
 (100000.00, 'Entrada', 'Aporte inicial', 'Financiamento de pesquisa em física quântica', '2022-01-01', 1),
 (80000.00, 'Entrada', 'Aporte inicial', 'Financiamento de pesquisa em engenharia sustentável', '2022-02-01', 2),
@@ -246,7 +130,6 @@ INSERT INTO Financeiro (valor, tipo_financeiro, descricao_gasto, descricao_movim
 (115000.00, 'Entrada', 'Aporte inicial', 'Financiamento de pesquisa em agricultura sustentável', '2022-09-01', 9),
 (125000.00, 'Entrada', 'Aporte inicial', 'Financiamento de pesquisa em conservação ambiental', '2022-10-01', 10);
 
--- Inserindo dados na tabela Financia
 INSERT INTO Financia (fk_Financiador_ID_financiador, fk_Financeiro_ID_financeiro) VALUES
 (1, 1),
 (2, 2),
