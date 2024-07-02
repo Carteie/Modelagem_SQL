@@ -73,16 +73,16 @@ INSERT INTO Projeto_pesquisa (titulo, descricao, data_inicio, data_finalizacao, 
 ('Projeto Conservação Ambiental', 'Estudo de métodos de conservação ambiental', '2022-10-01', '2024-10-01', 10);
 
 INSERT INTO Quem_pesquisa (FK_projeto, FK_CPF_orientador, FK_CPF_pesquisador) VALUES
-(1, 11111111111, 11111111111),
-(2, 22222222222, 22222222222),
-(3, 33333333333, 33333333333),
-(4, 44444444444, 44444444444),
-(5, 55555555555, 55555555555),
-(6, 66666666666, 66666666666),
-(7, 77777777777, 77777777777),
-(8, 88888888888, 88888888888),
-(9, 99999999999, 99999999999),
-(10, 10101010101, 10101010101);
+(1, 11111111111, 22222222222),
+(2, 22222222222, 33333333333),
+(3, 33333333333, 44444444444),
+(4, 44444444444, 55555555555),
+(5, 55555555555, 66666666666),
+(6, 66666666666, 77777777777),
+(7, 77777777777, 88888888888),
+(8, 88888888888, 99999999999),
+(9, 99999999999, 10101010101),
+(10, 10101010101, 11111111111);
 
 INSERT INTO Publicacao (titulo, descricao, area, FK_ID_pesquisa_PK, FK_ID_departamento) VALUES
 ('Publicação Física Quântica', 'Resultados da pesquisa em física quântica', 'Física', 1, 1),
