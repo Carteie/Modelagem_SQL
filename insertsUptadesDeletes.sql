@@ -34,7 +34,12 @@ INSERT INTO Trabalhador (CPF, nome, data_admissao, data_nascimento, email, ender
 (77777777777, 'Luciana Almeida', '2017-07-25', '1979-09-15', 'luciana.almeida@centro.com', 'Rua G, 404', '6677-8899', 'Ciências Sociais Aplicadas', 'Pesquisador', 7),
 (88888888888, 'Pedro Santos', '2018-11-13', '1986-06-20', 'pedro.santos@centro.com', 'Rua H, 505', '3344-5566', 'Medicina Preventiva', 'Pesquisador', 8),
 (99999999999, 'Ricardo Mota', '2022-04-22', '1981-01-25', 'ricardo.mota@centro.com', 'Rua I, 606', '7788-9900', 'Agricultura Sustentável', 'Pesquisador', 9),
-(10101010101, 'Fernanda Ribeiro', '2020-08-30', '1984-04-18', 'fernanda.ribeiro@centro.com', 'Rua J, 707', '4455-6677', 'Gestão Ambiental', 'Pesquisador', 10);
+(10101010101, 'Fernanda Ribeiro', '2020-08-30', '1984-04-18', 'fernanda.ribeiro@centro.com', 'Rua J, 707', '4455-6677', 'Gestão Ambiental', 'Pesquisador', 10),
+(11111111112, 'Luiz Fernando', '2023-03-15', '1985-05-25', 'luiz.fernando@centro.com', 'Rua K, 808', '1234-5679', 'Administração', 'Funcionario', 1),
+(22222222223, 'Carla Souza', '2022-11-22', '1987-10-18', 'carla.souza@centro.com', 'Rua L, 909', '9876-5433', 'Recursos Humanos', 'Funcionario', 2),
+(33333333334, 'Paulo Henrique', '2021-07-10', '1979-02-14', 'paulo.henrique@centro.com', 'Rua M, 1010', '4567-8911', 'Financeiro', 'Funcionario', 3),
+(44444444445, 'Sônia Lima', '2020-12-05', '1983-07-22', 'sonia.lima@centro.com', 'Rua N, 1111', '1122-3345', 'Logística', 'Funcionario', 4),
+(55555555556, 'Rafael Mendes', '2019-05-18', '1988-03-10', 'rafael.mendes@centro.com', 'Rua O, 1212', '5566-7789', 'Tecnologia da Informação', 'Funcionario', 5);
 
 INSERT INTO Equipamento (nome, descricao, FK_ID_departamento_PK) VALUES
 ('Microscópio Eletrônico', 'Microscópio para análises avançadas', 1),
@@ -49,16 +54,16 @@ INSERT INTO Equipamento (nome, descricao, FK_ID_departamento_PK) VALUES
 ('Sistema de Monitoramento Ambiental', 'Sistema completo para monitoramento de áreas ambientais', 10);
 
 INSERT INTO Compra (Data_compra, valor, fk_Equipamento_ID_equipamento, fk_Funcionario_CPF) VALUES
-('2023-01-10', 50000.00, 1, 11111111111),
-('2023-02-15', 25000.00, 2, 22222222222),
-('2023-03-20', 15000.00, 3, 33333333333),
-('2023-04-25', 30000.00, 4, 44444444444),
-('2023-05-30', 40000.00, 5, 55555555555),
-('2023-06-05', 35000.00, 6, 66666666666),
-('2023-07-10', 45000.00, 7, 77777777777),
-('2023-08-15', 20000.00, 8, 88888888888),
-('2023-09-20', 50000.00, 9, 99999999999),
-('2023-10-25', 60000.00, 10, 10101010101);
+('2023-01-10', 50000.00, 1, 11111111112),
+('2023-02-15', 25000.00, 2, 11111111112),
+('2023-03-20', 15000.00, 3, 22222222223),
+('2023-04-25', 30000.00, 4, 22222222223),
+('2023-05-30', 40000.00, 5, 33333333334),
+('2023-06-05', 35000.00, 6, 33333333334),
+('2023-07-10', 45000.00, 7, 44444444445),
+('2023-08-15', 20000.00, 8, 44444444445),
+('2023-09-20', 50000.00, 9, 55555555556),
+('2023-10-25', 60000.00, 10, 55555555556);
 
 INSERT INTO Projeto_pesquisa (titulo, descricao, data_inicio, data_finalizacao, FK_ID_departamento_PK) VALUES
 ('Projeto Física Quântica', 'Pesquisa avançada em física quântica', '2022-01-01', '2024-01-01', 1),
