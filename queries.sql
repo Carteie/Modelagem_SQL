@@ -4,11 +4,12 @@ FROM Trabalhador T
 JOIN Departamento D ON T.FK_ID_departamento_PK = D.ID_departamento
 ORDER BY T.nome;
 
--- Contar o número de trabalhadores em cada departamento, agrupados pelo nome do departamento
-SELECT D.nome AS Departamento, COUNT(T.CPF) AS Numero_de_Trabalhadores
+-- Contar o número de trabalhadores em cada departamento,em ordem descrescente, agrupados pelo nome do departamento e nome do centro de pesquisa
+SELECT D.nome AS Departamento, COUNT(T.CPF) AS Numero_de_Trabalhadores, C.nome AS Nome_Centro
 FROM Departamento D
 JOIN Trabalhador T ON D.ID_departamento = T.FK_ID_departamento_PK
-GROUP BY D.nome
+JOIN Centro_pesquisa C ON D.FK_CentPesq_PK = C.ID_centro
+GROUP BY D.nome, C.nome
 ORDER BY Numero_de_Trabalhadores DESC;
 
 -- Listar todas as publicações e os respectivos departamentos, ordenados pelo título da publicação
