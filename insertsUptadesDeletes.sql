@@ -39,7 +39,7 @@ INSERT INTO Trabalhador (CPF, nome, data_admissao, data_nascimento, email, ender
 (22222222223, 'Carla Souza', '2022-11-22', '1987-10-18', 'carla.souza@centro.com', 'Rua L, 909', '9876-5433', 'Recursos Humanos', 'Funcionario', 2),
 (33333333334, 'Paulo Henrique', '2021-07-10', '1979-02-14', 'paulo.henrique@centro.com', 'Rua M, 1010', '4567-8911', 'Financeiro', 'Funcionario', 3),
 (44444444445, 'Sônia Lima', '2020-12-05', '1983-07-22', 'sonia.lima@centro.com', 'Rua N, 1111', '1122-3345', 'Logística', 'Funcionario', 4),
-(55555555556, 'Rafael Mendes', '2019-05-18', '1988-03-10', 'rafael.mendes@centro.com', 'Rua O, 1212', '5566-7789', 'Tecnologia da Informação', 'Funcionario', 5);
+(55555555556, 'Rafael Mendes', '2019-05-18', '1988-03-10', 'rafael.mendes@centro.com', 'Rua O, 1212', '5566-7789', 'Tecnologia da Informação', 'Funcionario', 4);
 
 INSERT INTO Equipamento (nome, descricao, FK_ID_departamento_PK) VALUES
 ('Microscópio Eletrônico', 'Microscópio para análises avançadas', 1),
@@ -78,7 +78,6 @@ INSERT INTO Projeto_pesquisa (titulo, descricao, data_inicio, data_finalizacao, 
 ('Conservação Ambiental', 'Estudo de métodos de conservação ambiental', '2022-10-01', '2024-10-01', 10);
 
 INSERT INTO Quem_pesquisa (FK_projeto, FK_CPF_orientador, FK_CPF_pesquisador) VALUES
-
 (1, 11111111111, 22222222222),
 (2, 22222222222, 33333333333),
 (3, 33333333333, 44444444444),
@@ -140,6 +139,9 @@ INSERT INTO Financeiro (valor, tipo_financeiro, descricao_gasto, descricao_movim
 
 INSERT INTO Financia (fk_Financiador_ID_financiador, fk_Financeiro_ID_financeiro) VALUES
 (1, 1),
+(1, 2),
+(1, 3),
+(2, 1),
 (2, 2),
 (3, 3),
 (4, 4),
