@@ -66,16 +66,16 @@ INSERT INTO Compra (Data_compra, valor, fk_Equipamento_ID_equipamento, fk_Funcio
 ('2023-10-25', 60000.00, 10, 55555555556);
 
 INSERT INTO Projeto_pesquisa (titulo, descricao, data_inicio, data_finalizacao, FK_ID_departamento_PK) VALUES
-('Projeto Física Quântica', 'Pesquisa avançada em física quântica', '2022-01-01', '2024-01-01', 1),
-('Projeto Pontes Sustentáveis', 'Desenvolvimento de pontes com materiais sustentáveis', '2022-02-01', '2024-02-01', 2),
-('Projeto Genoma Humano', 'Estudo do genoma humano', '2022-03-01', '2024-03-01', 3),
-('Projeto Novos Fármacos', 'Desenvolvimento de novos medicamentos', '2022-04-01', '2024-04-01', 4),
-('Projeto Algoritmos Avançados', 'Desenvolvimento de algoritmos para análise de dados', '2022-05-01', '2024-05-01', 5),
-('Projeto Inteligência Artificial', 'Pesquisa em inteligência artificial aplicada', '2022-06-01', '2024-06-01', 6),
-('Projeto Impacto Social', 'Estudo do impacto social de políticas públicas', '2022-07-01', '2024-07-01', 7),
-('Projeto Saúde Preventiva', 'Pesquisa em métodos de saúde preventiva', '2022-08-01', '2024-08-01', 8),
-('Projeto Agricultura Sustentável', 'Desenvolvimento de técnicas de agricultura sustentável', '2022-09-01', '2024-09-01', 9),
-('Projeto Conservação Ambiental', 'Estudo de métodos de conservação ambiental', '2022-10-01', '2024-10-01', 10);
+('Física Quântica', 'Pesquisa avançada em física quântica', '2022-01-01', '2024-01-01', 1),
+('Pontes Sustentáveis', 'Desenvolvimento de pontes com materiais sustentáveis', '2022-02-01', '2024-02-01', 2),
+('Genoma Humano', 'Estudo do genoma humano', '2022-03-01', '2024-03-01', 3),
+('Novos Fármacos', 'Desenvolvimento de novos medicamentos', '2022-04-01', '2024-04-01', 4),
+('Algoritmos Avançados', 'Desenvolvimento de algoritmos para análise de dados', '2022-05-01', '2024-05-01', 5),
+('Inteligência Artificial', 'Pesquisa em inteligência artificial aplicada', '2022-06-01', '2024-06-01', 6),
+('Impacto Social', 'Estudo do impacto social de políticas públicas', '2022-07-01', '2024-07-01', 7),
+('Saúde Preventiva', 'Pesquisa em métodos de saúde preventiva', '2022-08-01', '2024-08-01', 8),
+('Agricultura Sustentável', 'Desenvolvimento de técnicas de agricultura sustentável', '2022-09-01', '2024-09-01', 9),
+('Conservação Ambiental', 'Estudo de métodos de conservação ambiental', '2022-10-01', '2024-10-01', 10);
 
 INSERT INTO Quem_pesquisa (FK_projeto, FK_CPF_orientador, FK_CPF_pesquisador) VALUES
 
