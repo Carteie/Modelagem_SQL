@@ -48,13 +48,24 @@ GROUP BY P.titulo
 HAVING COUNT(PA.fk_Trabalhador_CPF) > 1
 ORDER BY Numero_de_Trabalhadores DESC;
 
--- Listar financiadores que financiaram mais de 2 projetos
+-- Listar financiadores que financiaram mais de 2 projetos em ordem decrescente
 SELECT F.nome AS Financiador, COUNT(FI.fk_Financeiro_ID_financeiro) AS Numero_de_Projetos
 FROM Financiador F
 JOIN Financia FI ON F.ID_financiador = FI.fk_Financiador_ID_financiador
 GROUP BY F.nome
 HAVING COUNT(FI.fk_Financeiro_ID_financeiro) > 1
 ORDER BY Numero_de_Projetos DESC;
+
+--Listar financiadores que financiaram mais de 2 projetos em ordem crescentem, usando Subquery
+SELECT Financiador, Numero_de_Projetos
+FROM (
+    SELECT F.nome AS Financiador, COUNT(FI.fk_Financeiro_ID_financeiro) AS Numero_de_Projetos
+    FROM Financiador F
+    JOIN Financia FI ON F.ID_financiador = FI.fk_Financiador_ID_financiador
+    GROUP BY F.nome
+    HAVING COUNT(FI.fk_Financeiro_ID_financeiro) > 1
+) AS Subquery
+ORDER BY Numero_de_Projetos ASC;
 
 -- Listar financiadores que não financiaram nenhum projeto até o momento
 SELECT F.nome AS Financiador
