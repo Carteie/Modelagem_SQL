@@ -56,7 +56,7 @@ GROUP BY F.nome
 HAVING COUNT(FI.fk_Financeiro_ID_financeiro) > 1
 ORDER BY Numero_de_Projetos DESC;
 
---Listar financiadores que financiaram mais de 2 projetos em ordem crescentem, usando Subquery
+-- Listar financiadores que financiaram mais de 2 projetos em ordem crescentem, usando Subquery
 SELECT Financiador, Numero_de_Projetos
 FROM (
     SELECT F.nome AS Financiador, COUNT(FI.fk_Financeiro_ID_financeiro) AS Numero_de_Projetos
