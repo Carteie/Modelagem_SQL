@@ -4,7 +4,8 @@ FROM Trabalhador T
 JOIN Departamento D ON T.FK_ID_departamento_PK = D.ID_departamento
 ORDER BY T.nome;
 
--- Contar o número de trabalhadores em cada departamento,em ordem descrescente, agrupados pelo nome do departamento e nome do centro de pesquisa
+-- Contar o número de trabalhadores em cada departamento,em ordem descrescente, agrupados pelo nome do departamento e 
+-- nome do centro de pesquisa
 SELECT D.nome AS Departamento, COUNT(T.CPF) AS Numero_de_Trabalhadores, C.nome AS Nome_Centro
 FROM Departamento D
 JOIN Trabalhador T ON D.ID_departamento = T.FK_ID_departamento_PK
@@ -13,7 +14,7 @@ GROUP BY D.nome, C.nome
 ORDER BY Numero_de_Trabalhadores DESC;
 
 
--- Listar todas as publicações e os respectivos departamentos, ordenados pelo título da publicação
+-- Listar todas as publicações e os respectivos departamentos, ordenados por ordem alfabetica da publicação
 SELECT P.titulo AS Publicacao, D.nome AS Departamento
 FROM Publicacao P
 JOIN Departamento D ON P.FK_ID_departamento = D.ID_departamento
@@ -26,14 +27,15 @@ JOIN Equipamento E ON D.ID_departamento = E.FK_ID_departamento_PK
 GROUP BY D.nome
 ORDER BY Numero_de_Equipamentos DESC;
 
--- Listar todas as compras feitas por trabalhadores, incluindo o nome do trabalhador e o nome do equipamento, ordenados pela data da compra
+-- Listar todas as compras feitas por trabalhadores, incluindo o nome do trabalhador, valor e o nome do equipamento, 
+-- ordenados pela data da compra
 SELECT C.Data_compra, T.nome AS Trabalhador, E.nome AS Equipamento, C.valor
 FROM Compra C
 JOIN Trabalhador T ON C.fk_Funcionario_CPF = T.CPF
 JOIN Equipamento E ON C.fk_Equipamento_ID_equipamento = E.ID_equipamento
 ORDER BY C.Data_compra DESC;
 
---  Listar departamentos que têm mais de 3 trabalhadores
+--  Listar departamentos que têm mais de 1 trabalhador
 SELECT D.nome AS Departamento, COUNT(T.CPF) AS Numero_de_Trabalhadores
 FROM Departamento D
 JOIN Trabalhador T ON D.ID_departamento = T.FK_ID_departamento_PK
@@ -49,7 +51,7 @@ GROUP BY P.titulo
 HAVING COUNT(PA.fk_Trabalhador_CPF) > 1
 ORDER BY Numero_de_Trabalhadores DESC;
 
--- Listar financiadores que financiaram mais de 2 projetos em ordem decrescente
+-- Listar financiadores que financiaram mais de 1 projeto em ordem decrescente
 SELECT F.nome AS Financiador, COUNT(FI.fk_Financeiro_ID_financeiro) AS Numero_de_Projetos
 FROM Financiador F
 JOIN Financia FI ON F.ID_financiador = FI.fk_Financiador_ID_financiador
@@ -57,7 +59,7 @@ GROUP BY F.nome
 HAVING COUNT(FI.fk_Financeiro_ID_financeiro) > 1
 ORDER BY Numero_de_Projetos DESC;
 
--- Listar financiadores que financiaram mais de 2 projetos em ordem crescentem, usando Subquery
+-- Listar financiadores que financiaram mais de 1 projeto em ordem crescentem, usando Subquery
 SELECT Financiador, Numero_de_Projetos
 FROM (
     SELECT F.nome AS Financiador, COUNT(FI.fk_Financeiro_ID_financeiro) AS Numero_de_Projetos
@@ -84,7 +86,9 @@ WHERE P.titulo LIKE 'A%'
 ORDER BY T.nome, P.titulo;
 
 -- Criando View para ver todos os departamentos e seus projetos de pesquisa--
-create view departamentos_projetos_de_pesquisa as select nome,titulo from departamento,projeto_pesquisa where projeto_pesquisa.FK_ID_departamento_PK = departamento.ID_departamento order by nome asc;
+create view departamentos_projetos_de_pesquisa as select nome,titulo 
+from departamento,projeto_pesquisa where projeto_pesquisa.FK_ID_departamento_PK = departamento.ID_departamento 
+order by nome asc;
 
 select * from departamentos_projetos_de_pesquisa;
 select nome from departamentos_projetos_de_pesquisa where nome like "D%A";
