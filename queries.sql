@@ -12,6 +12,7 @@ JOIN Centro_pesquisa C ON D.FK_CentPesq_PK = C.ID_centro
 GROUP BY D.nome, C.nome
 ORDER BY Numero_de_Trabalhadores DESC;
 
+
 -- Listar todas as publicações e os respectivos departamentos, ordenados pelo título da publicação
 SELECT P.titulo AS Publicacao, D.nome AS Departamento
 FROM Publicacao P
@@ -37,7 +38,7 @@ SELECT D.nome AS Departamento, COUNT(T.CPF) AS Numero_de_Trabalhadores
 FROM Departamento D
 JOIN Trabalhador T ON D.ID_departamento = T.FK_ID_departamento_PK
 GROUP BY D.nome
-HAVING COUNT(T.CPF) > 3
+HAVING COUNT(T.CPF) > 1
 ORDER BY Numero_de_Trabalhadores DESC;
 
 -- Listar publicações que têm mais de um trabalhador participando
