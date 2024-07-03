@@ -85,7 +85,7 @@ JOIN Projeto_pesquisa P ON PE.FK_projeto = P.ID_pesquisa
 WHERE P.titulo LIKE 'A%'
 ORDER BY T.nome, P.titulo;
 
--- Criando View para ver todos os departamentos e seus projetos de pesquisa--
+-- Criando View para ver todos os departamentos e seus projetos de pesquisa
 create view departamentos_projetos_de_pesquisa as select nome,titulo 
 from departamento,projeto_pesquisa where projeto_pesquisa.FK_ID_departamento_PK = departamento.ID_departamento 
 order by nome asc;
