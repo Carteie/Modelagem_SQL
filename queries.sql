@@ -82,3 +82,9 @@ JOIN Quem_pesquisa PE ON T.CPF = PE.FK_CPF_pesquisador
 JOIN Projeto_pesquisa P ON PE.FK_projeto = P.ID_pesquisa
 WHERE P.titulo LIKE 'A%'
 ORDER BY T.nome, P.titulo;
+
+-- Criando View para ver todos os departamentos e seus projetos de pesquisa--
+create view departamentos_projetos_de_pesquisa as select nome,titulo from departamento,projeto_pesquisa where projeto_pesquisa.FK_ID_departamento_PK = departamento.ID_departamento order by nome asc;
+
+select * from departamentos_projetos_de_pesquisa;
+select nome from departamentos_projetos_de_pesquisa where nome like "D%A";
